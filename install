@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+# Install Homebrew
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install warp.zsh-theme
+rm ~/.oh-my-zsh/custom/themes/warp.zsh-theme
+ln -s $(realpath resources/warp.zsh-theme) ~/.oh-my-zsh/custom/themes/warp.zsh-theme
+sed -i -E 's/ZSH_THEME=".*"/ZSH_THEME="warp"/' ~/.zshrc
