@@ -1,8 +1,6 @@
 #!/bin/zsh
 
-ZSH_CUSTOM=${ZSH_CUSTOM:~/.oh-my-zsh/custom}
-
-set -x
+ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 
 # Install Homebrew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -15,8 +13,8 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/z
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
 # Install warp.zsh-theme
-rm ~/.oh-my-zsh/custom/themes/warp.zsh-theme
-ln -s $(realpath resources/warp.zsh-theme) ~/.oh-my-zsh/custom/themes/warp.zsh-theme
+rm $ZSH_CUSTOM/themes/warp.zsh-theme
+ln -s $(realpath resources/warp.zsh-theme) $ZSH_CUSTOM/themes/warp.zsh-theme
 
 # Setup .zshrc
 sed -i -E 's/ZSH_THEME=".*"/ZSH_THEME="warp"/' ~/.zshrc
