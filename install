@@ -5,6 +5,11 @@ ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 # Install Homebrew
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# Install Homebrew formulae
+brew install thefuck lolcat
+brew install jq yq
+brew install awscli vaulted
+
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -12,11 +17,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
-# Install warp.zsh-theme
+# Install oh-my-zsh theme
 rm $ZSH_CUSTOM/themes/warp.zsh-theme
 ln -s $(realpath resources/warp.zsh-theme) $ZSH_CUSTOM/themes/warp.zsh-theme
 
 # Setup .zshrc
 sed -i -E 's/ZSH_THEME=".*"/ZSH_THEME="warp"/' ~/.zshrc
 sed -i -E 's/plugins=(.*)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+echo '$(eval thefuck --alias)' >> ~/.zshrc
+
 open resources/Warp.terminal
