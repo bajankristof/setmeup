@@ -6,9 +6,11 @@ ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install Homebrew formulae
-brew install thefuck lolcat
+brew install thefuck
 brew install jq yq
-brew install awscli vaulted
+brew install awscli granted
+brew tap homebrew/cask-fonts
+brew install --cask font-jetbrains-mono-nerd-font
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
