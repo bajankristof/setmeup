@@ -60,13 +60,13 @@ function warp_git_info {
 }
 
 function warp_aws_info {
-    if [[ -z "$AWS_ACCESS_KEY_ID" ]]; then return; fi
+    if [[ -z "$AWS_PROFILE" && -z "$AWS_ACCESS_KEY_ID" ]]; then return; fi
 
     local AWS_PROFILE="$AWS_PROFILE"
     if [[ -z "$AWS_PROFILE" ]]; then AWS_PROFILE="$VAULTED_ENV"; fi
     if [[ -z "$AWS_PROFILE" ]]; then AWS_PROFILE="✗"; fi
 
-    echo -en "%{$FG[214]%}\uf0ef  %{$fg[gray]%}[%{$reset_color%}${AWS_PROFILE:-$VAULTED_ENV}%{$fg[gray]%}]%{$reset_color%}"
+    echo -en "%{$FG[214]%}\uf0ef  %{$fg[gray]%}[%{$reset_color%}${AWS_PROFILE}%{$fg[gray]%}]%{$reset_color%}"
 }
 
 function warp_time_info {
