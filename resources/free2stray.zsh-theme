@@ -60,7 +60,7 @@ function warp_git_info {
 }
 
 function warp_aws_info {
-    if [[ -z "$AWS_PROFILE" && -z "$AWS_ACCESS_KEY_ID" ]]; then return; fi
+    if [[ -z "$AWS_PROFILE" ]] && [[ -z "$AWS_ACCESS_KEY_ID" ]]; then return; fi
 
     local AWS_PROFILE="$AWS_PROFILE"
     if [[ -z "$AWS_PROFILE" ]]; then AWS_PROFILE="$VAULTED_ENV"; fi
