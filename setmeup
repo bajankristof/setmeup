@@ -1,0 +1,67 @@
+#!/bin/zsh
+
+ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+
+set -e
+
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+function blue {
+  echo -e "\033[1;34m$1\033[0m"
+}
+
+function green {
+  echo -e "\033[1;32m$1\033[0m"
+}
+
+# Install Homebrew
+if ! command -v brew &> /dev/null; then
+    blue "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    green "done\n"
+fi
+
+# Install Homebrew formulae
+blue "Installing Homebrew formulae..."
+brew bundle --file="${__dir}/Brewfile"
+green "done\n"
+
+if [[ ! -d ~/.oh-my-zsh ]]; then
+  # Install Oh My Zsh
+  blue "Installing Oh My Zsh..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  green "done\n"
+fi
+
+# Install Oh My Zsh plugins
+if [[ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]]; then
+  blue "Installing Oh My Zsh autosuggestions..."
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  green "done\n"
+fi
+
+if [[ ! -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]]; then
+  blue "Installing Oh My Zsh syntax highlighting..."
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+  green "done\n"
+fi
+
+# Install Oh My Zsh theme
+blue "Installing Oh My Zsh theme..."
+rm $ZSH_CUSTOM/themes/free2stray.zsh-theme
+ln -s $(realpath resources/free2stray.zsh-theme) $ZSH_CUSTOM/themes/free2stray.zsh-theme
+green "done\n"
+
+# Setup .zshrc and .zprofile
+blue "Setting up .zshrc and .zprofile..."
+sed -i -E 's/ZSH_THEME=".*"/ZSH_THEME="free2stray"/' ~/.zshrc
+sed -i -E 's/plugins=(.*)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+
+if [[ ! -f ~/.zprofile ]]; then touch ~/.zprofile; fi
+profile="$(cat ~/.zprofile)"
+if [[ $profile != *"brew shellenv"* ]]; then echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile; fi
+if [[ $profile != *"eval thefuck"* ]]; then echo 'eval "$(thefuck --alias)"' >> ~/.zprofile; fi
+green "done\n"
+
+open resources/free2stray.terminal
