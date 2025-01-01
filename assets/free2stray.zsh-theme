@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-function warp_join {
+function f2s_join {
     local SEPARATOR="$1 "
     shift
 
@@ -14,21 +14,21 @@ function warp_join {
     echo -en "$FIRST" "${REST[@]/#/$SEPARATOR}"
 }
 
-function warp_random {
+function f2s_random {
     local VALUES=("$@")
     local RANDOM=$(od -An -N2 -i /dev/urandom)
     echo -en $VALUES[$RANDOM%$#VALUES+1]
 }
 
-function warp_random_happy_emoji {
-    warp_random 😃 😇 😎
+function f2s_random_happy_emoji {
+    f2s_random 😃 😇 😎
 }
 
-function warp_random_angry_emoji {
-    warp_random 😡 🥵 🤮 💀 💩 🥶 🤬 😳 😱 😭 🫨
+function f2s_random_angry_emoji {
+    f2s_random 😡 🥵 🤮 💀 💩 🥶 🤬 😳 😱 😭 🫨
 }
 
-function warp_project_info {
+function f2s_project_info {
     local COMPONENTS=()
 
     if [[ -n $(echo Dockerfile*(N)) || -n $(echo docker-compose*.yml(N)) ]]; then COMPONENTS+=("%{$FG[033]%}\uf21f  %{$reset_color%}"); fi
@@ -45,7 +45,7 @@ function warp_project_info {
     echo -en $COMPONENTS
 }
 
-function warp_git_info {
+function f2s_git_info {
     if [[ ! -d .git && ! -f .git ]]; then return; fi
 
     local COMMIT_SHA
@@ -59,7 +59,7 @@ function warp_git_info {
     echo -en "$ICON %{$fg[gray]%}[%{$reset_color%}$COMMIT_SHA%{$fg[gray]%}]%{$reset_color%}"
 }
 
-function warp_aws_info {
+function f2s_aws_info {
     if [[ -z "$AWS_PROFILE" ]] && [[ -z "$AWS_ACCESS_KEY_ID" ]]; then return; fi
 
     local AWS_PROFILE="$AWS_PROFILE"
@@ -69,21 +69,21 @@ function warp_aws_info {
     echo -en "%{$FG[214]%}\uf0ef  %{$fg[gray]%}[%{$reset_color%}${AWS_PROFILE}%{$fg[gray]%}]%{$reset_color%}"
 }
 
-function warp_time_info {
+function f2s_time_info {
     echo -en "%{$FG[208]%}%B$(date +%R)%b%{$reset_color%}"
 }
 
-PROMPT='%(?:%{$fg_bold[blue]%}$(warp_random_happy_emoji):%{$fg_bold[red]%}$(warp_random_angry_emoji)) '
+PROMPT='%(?:%{$fg_bold[blue]%}$(f2s_random_happy_emoji):%{$fg_bold[red]%}$(f2s_random_angry_emoji)) '
 PROMPT+='%{$fg_bold[magenta]%}%~%{$reset_color%} '
 PROMPT+='$(git_prompt_info)'
 PROMPT+='%{$reset_color%}'
 
-RPROMPT='$(warp_join '
+RPROMPT='$(f2s_join '
 RPROMPT+='"%{$FG[235]%}|%{$reset_color%}" '
-RPROMPT+='"$(warp_project_info)" '
-RPROMPT+='"$(warp_git_info)" '
-RPROMPT+='"$(warp_aws_info)" '
-RPROMPT+='"$(warp_time_info)"'
+RPROMPT+='"$(f2s_project_info)" '
+RPROMPT+='"$(f2s_git_info)" '
+RPROMPT+='"$(f2s_aws_info)" '
+RPROMPT+='"$(f2s_time_info)"'
 RPROMPT+=')'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[green]%}git:(%{$fg[yellow]%}"
