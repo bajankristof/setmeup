@@ -1,0 +1,27 @@
+theme = "Ayu Mirage"
+
+cursor-style = bar
+cursor-style-blink = true
+
+font-family = "JetBrainsMono NFM Regular"
+font-family-bold = "JetBrainsMono NFM Bold"
+font-family-bold-italic = "JetBrainsMono NFM Bold Italic"
+font-family-italic = "JetBrainsMono NFM Italic"
+font-size = 15
+
+window-padding-balance = true
+window-padding-x = 8
+window-title-font-family = "JetBrainsMono NFM Regular"
+
+adjust-cell-height = 30%
+adjust-cursor-height = -4
+adjust-cursor-thickness = 3
+
+macos-auto-secure-input = true
+macos-secure-input-indication = true
+macos-titlebar-style = transparent
+
+quick-terminal-position = bottom
+quick-terminal-screen = mouse
+
+keybind = global:super+shift+t=toggle_quick_terminal

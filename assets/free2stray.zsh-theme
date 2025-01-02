@@ -52,11 +52,11 @@ function f2s_git_info {
     COMMIT_SHA="$(git rev-parse --short HEAD 2>&1)"
     if [[ "$?" != '0' ]]; then COMMIT_SHA="✗"; fi
 
-    local ICON="%{$FG[202]%}\uf418"
+    local ICON="%{$FG[202]%}\uf418%{$reset_color%}"
     local REMOTE_URL="$(git config --local --get remote.origin.url 2>&1)"
-    if [[ "$REMOTE_URL" == *'github.com'* ]]; then ICON="%{$FG[231]%}\ue65b"; fi
+    if [[ "$REMOTE_URL" == *'github.com'* ]]; then ICON="%{$FG[231]%}\ue65b%{$reset_color%}"; fi
 
-    echo -en "$ICON %{$fg[gray]%}[%{$reset_color%}$COMMIT_SHA%{$fg[gray]%}]%{$reset_color%}"
+    echo -en "$ICON %{$fg_bold[default]%}$COMMIT_SHA%{$reset_color%}"
 }
 
 function f2s_aws_info {
@@ -66,27 +66,27 @@ function f2s_aws_info {
     if [[ -z "$AWS_PROFILE" ]]; then AWS_PROFILE="$VAULTED_ENV"; fi
     if [[ -z "$AWS_PROFILE" ]]; then AWS_PROFILE="✗"; fi
 
-    echo -en "%{$FG[214]%}\uf0ef  %{$fg[gray]%}[%{$reset_color%}${AWS_PROFILE}%{$fg[gray]%}]%{$reset_color%}"
+    echo -en "%{$FG[214]%}\uf0ef  %{$reset_color%}%{$fg[gray]%}[%{$reset_color%}${AWS_PROFILE}%{$fg[gray]%}]%{$reset_color%}"
 }
 
 function f2s_time_info {
     echo -en "%{$FG[208]%}%B$(date +%R)%b%{$reset_color%}"
 }
 
-PROMPT='%(?:%{$fg_bold[blue]%}$(f2s_random_happy_emoji):%{$fg_bold[red]%}$(f2s_random_angry_emoji)) '
+PROMPT='%(?:$(f2s_random_happy_emoji):$(f2s_random_angry_emoji)) '
 PROMPT+='%{$fg_bold[magenta]%}%~%{$reset_color%} '
 PROMPT+='$(git_prompt_info)'
 PROMPT+='%{$reset_color%}'
 
 RPROMPT='$(f2s_join '
-RPROMPT+='"%{$FG[235]%}|%{$reset_color%}" '
+RPROMPT+='"%{$fg_bold[default]%}|%{$reset_color%}" '
 RPROMPT+='"$(f2s_project_info)" '
 RPROMPT+='"$(f2s_git_info)" '
 RPROMPT+='"$(f2s_aws_info)" '
 RPROMPT+='"$(f2s_time_info)"'
 RPROMPT+=')'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[green]%}git:(%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[green]%})%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}✗"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[green]%}git:(%{$reset_color%}%{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg_bold[green]%})%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}✗%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""

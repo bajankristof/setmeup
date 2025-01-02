@@ -59,11 +59,18 @@ ln -s "${__dir}/assets/free2stray.zsh-theme" $ZSH_CUSTOM/themes/free2stray.zsh-t
 green 'done'
 echo ''
 
+# Install Ghostty configuration
+blue 'Installing Ghostty configuration...'
+rm -rf ~/.config/ghostty
+ln -s "${__dir}/assets/ghostty" ~/.config/ghostty
+green 'done'
+echo ''
+
 # Setup .zshrc
 blue 'Setting up .zshrc...'
 rm -f ~/.zshrc
 rm -rf ~/.zshrc.d
-cp "${__dir}/assets/zshrc.sh" ~/.zshrc
-cp -r "${__dir}/assets/zshrc.d" ~/.zshrc.d
+ln -s "${__dir}/assets/zshrc.sh" ~/.zshrc
+ln -s "${__dir}/assets/zshrc.d" ~/.zshrc.d
 open "${__dir}/assets/free2stray.terminal"
 green 'done'
