@@ -5,13 +5,23 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME='free2stray'
 
 zstyle ':omz:update' frequency 30
-zstyle ':omz:plugins:nvm' lazy yes
 
-plugins=(git nvm zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-for file in $HOME/.zshrc.d/*; do
+
+setopt localoptions extendedglob
+source $HOME/.zshrc.d/brew.sh
+for file in $HOME/.zshrc.d/^brew.sh; do
     source $file
 done
 
 # zprof
+
+# pnpm
+export PNPM_HOME="/Users/kristof.bajan/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

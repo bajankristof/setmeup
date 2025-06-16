@@ -6,21 +6,16 @@ set -e
 
 __dir="${0:a:h}"
 
-function blue {
-  echo -e "\033[1;34m$1\033[0m"
-}
-
-function green {
-  echo -e "\033[1;32m$1\033[0m"
-}
+source "${__dir}/lib/asdf.sh"
+source "${__dir}/lib/colors.sh"
 
 # Install Homebrew
 if ! command -v brew &> /dev/null; then
-    blue 'Installing Homebrew...'
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    green 'done'
-    echo ''
+  blue 'Installing Homebrew...'
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  green 'done'
+  echo ''
 fi
 
 # Install Homebrew formulae
@@ -66,11 +61,46 @@ ln -s "${__dir}/assets/ghostty" ~/.config/ghostty
 green 'done'
 echo ''
 
+# Install Neovim configuration
+blue 'Installing Neovim configuration..'
+rm -rf ~/.config/nvim
+rm -f ~/.editorconfig
+ln -s "${__dir}/assets/nvim" ~/.config/nvim
+ln -s "${__dir}/assets/.editorconfig" ~/.editorconfig
+green 'done'
+echo ''
+
+# Install LSPs
+blue 'Installing Go language server...'
+if ! command -v gopls &> /dev/null; then
+  go install golang.org/x/tools/gopls@latest
+fi
+green 'done'
+echo ''
+
+blue 'Installing TypeScript language server...'
+asdf_for_each nodejs npm i -g @typescript/native-preview > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+  green 'done'
+elif [ $? -eq 126 ]; then
+  yellow 'Node.js not found in asdf, skipping TypeScript language server installation.'
+fi
+echo ''
+
+blue 'Installing Ruby language server...'
+asdf_for_each ruby gem install ruby-lsp ruby-lsp-rails ruby-lsp-rspec --conservative > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+  green 'done'
+elif [ $? -eq 126 ]; then
+  yellow 'Ruby not found in asdf, skipping Ruby language server installation.'
+fi
+echo ''
+
 # Setup .zshrc
 blue 'Setting up .zshrc...'
 rm -f ~/.zshrc
 rm -rf ~/.zshrc.d
 ln -s "${__dir}/assets/zshrc.sh" ~/.zshrc
 ln -s "${__dir}/assets/zshrc.d" ~/.zshrc.d
-open "${__dir}/assets/free2stray.terminal"
 green 'done'
+

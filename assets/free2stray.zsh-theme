@@ -66,7 +66,7 @@ function f2s_aws_info {
     if [[ -z "$AWS_PROFILE" ]]; then AWS_PROFILE="$VAULTED_ENV"; fi
     if [[ -z "$AWS_PROFILE" ]]; then AWS_PROFILE="✗"; fi
 
-    echo -en "%{$FG[214]%}\uf0ef  %{$reset_color%}%{$fg[gray]%}[%{$reset_color%}${AWS_PROFILE}%{$fg[gray]%}]%{$reset_color%}"
+    echo -en "%{$FG[214]%}\uf0ef  %{$reset_color%}%{$fg[gray]%}%{$reset_color%}${AWS_PROFILE}%{$fg[gray]%}%{$reset_color%}"
 }
 
 function f2s_time_info {

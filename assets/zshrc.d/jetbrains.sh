@@ -1,1 +1,1 @@
-export PATH=~/.jetbrains:$PATH
+export PATH="$HOME/.jetbrains:$PATH"

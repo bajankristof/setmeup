@@ -23,5 +23,6 @@ macos-titlebar-style = transparent
 
 quick-terminal-position = bottom
 quick-terminal-screen = mouse
+quick-terminal-autohide = false
 
 keybind = global:super+shift+t=toggle_quick_terminal
