@@ -9,6 +9,6 @@ return {
     local oil = require('oil')
     oil.setup()
 
-    vim.keymap.set('n', '<space>o', oil.open)
+    vim.keymap.set('n', '-', oil.open)
   end,
 }
