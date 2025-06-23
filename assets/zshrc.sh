@@ -7,6 +7,7 @@ export ZSH_THEME='free2stray'
 zstyle ':omz:update' frequency 30
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+bindkey '^j' autosuggest-accept
 
 source $ZSH/oh-my-zsh.sh
 

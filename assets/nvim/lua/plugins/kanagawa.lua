@@ -4,11 +4,7 @@ return {
   config = function()
     local kanagawa = require('kanagawa')
 
-    kanagawa.setup {
-      compile = true,
-      transparent = true,
-      theme = 'wave',
-    }
+    kanagawa.setup { transparent = true }
 
     vim.cmd('colorscheme kanagawa')
   end

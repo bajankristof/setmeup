@@ -14,5 +14,12 @@ return {
     'package.json',
     '.git',
   },
+  capabilities = {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = false,
+      },
+    },
+  },
 }
 

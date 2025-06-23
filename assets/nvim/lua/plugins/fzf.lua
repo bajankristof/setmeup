@@ -8,6 +8,17 @@ return {
   config = function()
     local fzf = require('fzf-lua')
 
+    fzf.setup {
+      grep = {
+        rg_glob = true,
+      },
+      keymap = {
+        fzf = {
+          ['ctrl-q'] = 'select-all+accept',
+        },
+      },
+    }
+
     vim.keymap.set('n', '<space>ff', fzf.files)
     vim.keymap.set('n', '<space>fg', fzf.live_grep)
     vim.keymap.set('n', '<space>fs', fzf.lsp_document_symbols)
