@@ -10,5 +10,5 @@ return {
       nerd_font_variant = 'mono',
     },
   },
-  opts_extend = { "sources.default" },
+  opts_extend = { 'sources.default' },
 }
