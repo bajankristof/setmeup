@@ -1,6 +1,6 @@
-#!/bin/zsh
+export PATH="$HOME/.asdf/shims:$PATH"
 
-function asdf_for_each {
+function asdfl {
   local plugin=$1
   local command
   IFS=$' ' command="${*:2}"

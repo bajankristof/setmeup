@@ -1,15 +1,21 @@
 #!/bin/zsh
 
-ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
-
 set -e
 
-__dir="${0:a:h}"
+cd "${0:a:h}"
 
-source "${__dir}/lib/asdf.sh"
-source "${__dir}/lib/colors.sh"
+source colors.sh
 
-# Install Homebrew
+git submodule update --init
+
+if [[ ! -d ~/.oh-my-zsh ]]; then
+  blue 'Installing Oh My Zsh...'
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" '' --unattended
+  rm -rf ~/.zshrc*
+  green 'done'
+  echo ''
+fi
+
 if ! command -v brew &> /dev/null; then
   blue 'Installing Homebrew...'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -18,59 +24,16 @@ if ! command -v brew &> /dev/null; then
   echo ''
 fi
 
-# Install Homebrew formulae
 blue 'Installing Homebrew formulae...'
-brew bundle --file="${__dir}/Brewfile"
+brew bundle
 green 'done'
 echo ''
 
-# Install Oh My Zsh
-if [[ ! -d ~/.oh-my-zsh ]]; then
-  blue 'Installing Oh My Zsh...'
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  green 'done'
-  echo ''
-fi
-
-# Install Oh My Zsh plugins
-if [[ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]]; then
-  blue 'Installing Oh My Zsh autosuggestions...'
-  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-  green 'done'
-  echo ''
-fi
-
-if [[ ! -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]]; then
-  blue 'Installing Oh My Zsh syntax highlighting...'
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-  green 'done'
-  echo ''
-fi
-
-# Install Oh My Zsh theme
-blue 'Installing Oh My Zsh theme...'
-rm $ZSH_CUSTOM/themes/free2stray.zsh-theme
-ln -s "${__dir}/assets/free2stray.zsh-theme" $ZSH_CUSTOM/themes/free2stray.zsh-theme
+blue 'Installing dotfiles...'
+stow . -t ~
 green 'done'
 echo ''
 
-# Install Ghostty configuration
-blue 'Installing Ghostty configuration...'
-rm -rf ~/.config/ghostty
-ln -s "${__dir}/assets/ghostty" ~/.config/ghostty
-green 'done'
-echo ''
-
-# Install Neovim configuration
-blue 'Installing Neovim configuration..'
-rm -rf ~/.config/nvim
-rm -f ~/.editorconfig
-ln -s "${__dir}/assets/nvim" ~/.config/nvim
-ln -s "${__dir}/assets/.editorconfig" ~/.editorconfig
-green 'done'
-echo ''
-
-# Install LSPs
 blue 'Installing Go language server...'
 if ! command -v gopls &> /dev/null; then
   go install golang.org/x/tools/gopls@latest
@@ -79,7 +42,7 @@ green 'done'
 echo ''
 
 blue 'Installing TypeScript language server...'
-asdf_for_each nodejs npm i -g @typescript/native-preview > /dev/null 2>&1
+asdfl nodejs npm i -g @typescript/native-preview > /dev/null 2>&1
 if [ $? -eq 0 ]; then
   green 'done'
 elif [ $? -eq 126 ]; then
@@ -88,19 +51,11 @@ fi
 echo ''
 
 blue 'Installing Ruby language server...'
-asdf_for_each ruby gem install ruby-lsp ruby-lsp-rails ruby-lsp-rspec --conservative > /dev/null 2>&1
+asdfl ruby gem install ruby-lsp ruby-lsp-rails ruby-lsp-rspec --conservative > /dev/null 2>&1
 if [ $? -eq 0 ]; then
   green 'done'
 elif [ $? -eq 126 ]; then
   yellow 'Ruby not found in asdf, skipping Ruby language server installation.'
 fi
 echo ''
-
-# Setup .zshrc
-blue 'Setting up .zshrc...'
-rm -f ~/.zshrc
-rm -rf ~/.zshrc.d
-ln -s "${__dir}/assets/zshrc.sh" ~/.zshrc
-ln -s "${__dir}/assets/zshrc.d" ~/.zshrc.d
-green 'done'
 

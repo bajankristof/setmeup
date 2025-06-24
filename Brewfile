@@ -1,6 +1,7 @@
 tap 'common-fate/granted'
 tap 'hashicorp/tap'
 
+brew 'stow'
 brew 'jq'
 brew 'yq'
 brew 'asdf'

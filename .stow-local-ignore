@@ -1,0 +1,7 @@
+^/\.git*
+^/\.stow-local-ignore
+^/Brewfile
+^/colors.sh
+^/free2stray.terminal
+^/setmeup
+^/README
