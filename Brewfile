@@ -1,26 +1,32 @@
 tap 'common-fate/granted'
 tap 'hashicorp/tap'
 
-brew 'stow'
-brew 'jq'
-brew 'yq'
+# Shell
 brew 'asdf'
-brew 'awscli'
-brew 'bkt'
 brew 'bash'
-brew 'fzf'
-brew 'go'
-brew 'granted'
-brew 'nvim'
-brew 'ripgrep'
-brew 'fd'
-brew 'luarocks'
-brew 'lua-language-server'
+brew 'bkt'
+brew 'starship'
+brew 'stow'
 brew 'thefuck'
 
+# Neovim
+brew 'nvim'
+brew 'fzf'
+brew 'fd'
+brew 'ripgrep'
+
+# Tools
+brew 'awscli'
+brew 'jq'
+brew 'yq'
+brew 'go'
+brew 'granted'
 brew 'hashicorp/tap/packer'
 brew 'hashicorp/tap/terraform'
 brew 'hashicorp/tap/terraform-ls'
+brew 'luarocks'
+brew 'lua-language-server'
 
+# Casks
 cask 'ghostty'
 cask 'font-jetbrains-mono-nerd-font'

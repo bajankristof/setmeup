@@ -1,21 +1,27 @@
 # zmodload zsh/zprof
 
 export LANG='en_US.UTF-8'
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_THEME='free2stray'
+export CLICOLOR='auto'
 
-zstyle ':omz:update' frequency 30
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+setopt localoptions extendedglob
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+source $HOME/.config/zsh/brew.zsh
+for entry in $HOME/.config/zsh/^brew.zsh; do
+  if [[ -d $entry ]]; then
+    local file="$entry/$(basename $entry).zsh"
+    if [[ -f $file ]]; then
+      source $file
+    fi
+  elif [[ $entry == *.zsh ]]; then
+    source $entry
+  fi
+done
+
 bindkey '^f' autosuggest-accept
 
-source $ZSH/oh-my-zsh.sh
-
-setopt localoptions extendedglob
-source $HOME/.zshrc.d/brew.sh
-for file in $HOME/.zshrc.d/^brew.sh; do
-    source $file
-done
+eval "$(starship init zsh)"
 
 # zprof
 

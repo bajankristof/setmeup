@@ -4,17 +4,9 @@ set -e
 
 cd "${0:a:h}"
 
-source colors.sh
+source colors.zsh
 
 git submodule update --init
-
-if [[ ! -d ~/.oh-my-zsh ]]; then
-  blue 'Installing Oh My Zsh...'
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" '' --unattended
-  rm -rf ~/.zshrc*
-  green 'done'
-  echo ''
-fi
 
 if ! command -v brew &> /dev/null; then
   blue 'Installing Homebrew...'
