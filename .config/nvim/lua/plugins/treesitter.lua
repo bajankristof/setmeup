@@ -18,6 +18,7 @@ return {
         'lua',
         'ruby',
         'terraform',
+        'tsx',
         'typescript',
       }
     end,

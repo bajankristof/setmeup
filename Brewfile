@@ -22,4 +22,5 @@ brew 'hashicorp/tap/packer'
 brew 'hashicorp/tap/terraform'
 brew 'hashicorp/tap/terraform-ls'
 
+cask 'ghostty'
 cask 'font-jetbrains-mono-nerd-font'

@@ -10,6 +10,9 @@ vim.g.have_nerd_font = true
 vim.o.number = true
 vim.o.relativenumber = true
 
+-- Hide command line when not needed
+vim.o.cmdheight = 0
+
 -- Keep some space around the cursor
 vim.o.scrolloff = 12
 

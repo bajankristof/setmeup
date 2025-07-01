@@ -1,4 +1,4 @@
-theme = "Ayu Mirage"
+theme = "catppuccin-macchiato"
 
 cursor-style = bar
 cursor-style-blink = true
@@ -12,6 +12,7 @@ font-size = 15
 window-padding-balance = true
 window-padding-x = 8
 window-title-font-family = "JetBrainsMono NFM Regular"
+maximize = true
 
 adjust-cell-height = 30%
 adjust-cursor-height = -4
@@ -26,3 +27,4 @@ quick-terminal-screen = mouse
 quick-terminal-autohide = false
 
 keybind = global:super+shift+t=toggle_quick_terminal
+keybind = super+k=text:\x0c

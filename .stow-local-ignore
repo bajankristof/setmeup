@@ -1,4 +1,4 @@
-^/\.git*
+^/\.git.*
 ^/\.stow-local-ignore
 ^/Brewfile
 ^/colors.sh
