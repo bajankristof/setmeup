@@ -11,7 +11,7 @@ $username\
 $directory\
 [](bg:yellow fg:peach)\
 $git_branch\
-${custom.git_status}\
+$git_status\
 [](fg:yellow bg:green)\
 $c\
 $golang\
@@ -24,7 +24,7 @@ $rust\
 $character"""
 
 right_format = """
-${custom.aws}"""
+$aws"""
 
 [os]
 disabled = false
@@ -75,11 +75,11 @@ symbol = ""
 style = "bg:yellow"
 format = "[[ $symbol $branch ](fg:crust bg:yellow)]($style)"
 
-[custom.git_status]
-command = "true"
-when = "[[ -n $(git status --porcelain) ]]"
-symbol = "󰦒"
-format = "[[$symbol ](fg:crust bg:yellow)]($style)"
+[git_status]
+style = "bg:yellow"
+format = "[[$all_status ](fg:crust bg:yellow)]($style)"
+ignore_submodules = true
+use_git_executable = true
 
 [c]
 symbol = " "
@@ -115,11 +115,15 @@ vimcmd_replace_one_symbol = "[❮](bold fg:lavender)"
 vimcmd_replace_symbol = "[❮](bold fg:lavender)"
 vimcmd_visual_symbol = "[❮](bold fg:yellow)"
 
-[custom.aws]
-command = "~/.config/starship/modules/aws"
-when = "[[ -n $AWS_PROFILE ]]"
-symbol = "󰒋 "
-format = "[](fg:crust)[$symbol($output)](fg:lavender bg:crust)[](fg:crust)"
+[aws]
+symbol = " "
+style = "fg:text bg:mantle"
+format = """
+[(\
+[](fg:mantle)\
+$symbol $profile( $duration)\
+[](fg:mantle)
+)]($style)"""
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"

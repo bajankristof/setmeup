@@ -1,9 +1,0 @@
-#!/bin/zsh
-
-echo -n $AWS_PROFILE
-if [[ -n $AWS_REGION ]]; then
-  echo -n " ($AWS_REGION)"
-elif [[ -n $AWS_DEFAULT_REGION ]]; then
-  echo -n " ($AWS_DEFAULT_REGION)"
-fi
-
