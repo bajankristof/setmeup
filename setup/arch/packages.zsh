@@ -71,23 +71,18 @@ export PACKAGES=(
   # Tools
   aws-cli
   btop
-  buf
   difftastic
   docker
   docker-buildx
   docker-compose
   dotnet-runtime
   dotnet-sdk
-  go
-  gopls
   helm
   httpie
   jq
   kubectl
-  packer
+  mise
   tealdeer
-  terraform
-  terragrunt
   yq
   zoxide
 
@@ -101,7 +96,6 @@ export PACKAGES=(
 
 export AUR_PACKAGES=(
   1password
-  asdf-vm
   duckdb-bin
   game-devices-udev
   google-chrome
@@ -110,7 +104,6 @@ export AUR_PACKAGES=(
   noctalia-shell
   opencode-bin
   protonplus
-  terraform-ls
   vicinae-bin
   visual-studio-code-bin
   xpadneo-dkms

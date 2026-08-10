@@ -4,7 +4,7 @@ set -e
 
 cd "${0:a:h}"
 
-zsh tsls.zsh
-zsh rubyls.zsh
+(cd ~; mise install)
+
 zsh roslynls.zsh
 
