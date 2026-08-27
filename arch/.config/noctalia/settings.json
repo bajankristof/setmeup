@@ -136,7 +136,7 @@
                     "chevronColor": "none",
                     "colorizeIcons": true,
                     "drawerEnabled": false,
-                    "hidePassive": false,
+                    "hidePassive": true,
                     "id": "Tray",
                     "pinned": [
                     ]
