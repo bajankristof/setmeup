@@ -53,12 +53,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"')
   hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"')
   hl.exec_cmd('gsettings set org.gnome.desktop.wm.preferences button-layout ":"')
-
-  -- Workaround for Hyprland 0.56 regression: the SDR->HDR modeset at boot leaves the
-  -- amdgpu CRTC flip state wedged (every present returns EBUSY -> ~0 FPS on a 120Hz
-  -- panel). A DPMS off/on clears it by re-initializing the connector.
-  hl.timer(function() hl.dispatch(hl.dsp.dpms("off")) end, { timeout = 2000, type = "oneshot" })
-  hl.timer(function() hl.dispatch(hl.dsp.dpms("on")) end,  { timeout = 3500, type = "oneshot" })
 end)
 
 
